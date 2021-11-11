@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Instask - Inicio</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--Bootstrap 4-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <!--Main css-->
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='main.css') }}">
+    <script src='main.js'></script>
+</head>
+<body>
+    <main class="container p-4">
+        <h1 class="display-4 text-center mt-4">Instask</h1>
+        <div class="row">
+            <div class="col-md-4 offset-md-4 my-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <form action="create-task" method="post">
+                            <div class="form-group">
+                            <input name="content" type="text" class="form-control" placeholder="Task" autofocus>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Save</button>
+                        </form>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for task in tasks %}
+                            <li class="list-group-item">
+                                <span class="{% if task.done %} done {% endif %}">{{task.content}}</span>
+                                <a href="/done/{{task.id}}" class="btn btn-success btn-sm">Done</a>
+                                <a href="/delete/{{task.id}}" class="btn btn-danger btn-sm" >Delete</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
